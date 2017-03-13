@@ -5,7 +5,8 @@
   "dependencies": {
     "antares-protocol": "^0.3.14",
     "react": "15.4.2",
-    "react-dom": "15.4.2"
+    "react-dom": "15.4.2",
+    "react-redux": "^5.0.3"
   },
   "devDependencies": {
     "react-scripts": "0.9.2"

@@ -22,8 +22,8 @@ const eventHandlers = {
 
 // Start us up with the welcome element showing..
 // An element is an instance of a component
-const welcomeElement = <WelcomeComponent { ...eventHandlers } />
-const smilerElement = <Smiler { ...eventHandlers } />
+const welcomeElement = <WelcomeComponent { ...eventHandlers } store={ Antares.store }/>
+const smilerElement = <Smiler { ...eventHandlers } store={ Antares.store }/>
 const reactRoot = document.getElementById('root')
 ReactDOM.render(welcomeElement, reactRoot)
 
