@@ -11,7 +11,7 @@
   "devDependencies": {
     "react-scripts": "0.9.2"
   },
-  "homepage": "https://www.deanius.com/antares-example-static-smile-sender",
+  "homepage": "https://www.deanius.com/antares-example-static-smile-sender-2",
   "scripts": {
     "start": "PORT=7777 react-scripts start",
     "build": "react-scripts build",
