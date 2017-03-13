@@ -6,7 +6,7 @@ body {
 
 #root {
   animation: 3s slidein;
-  animation-delay: 1s;
+  animation-delay: 0s;
 }
 
 @keyframes slidein {

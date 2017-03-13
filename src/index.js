@@ -5,7 +5,8 @@ import { AntaresInit } from 'antares-protocol'
 
 // Connect us to a websocket
 let Antares = AntaresInit({
-    connectionUrl: 'ws://antares-example-smile-sender.herokuapp.com/websocket'
+    //connectionUrl: 'ws://antares-example-smile-sender.herokuapp.com/websocket'
+    connectionUrl: 'ws://localhost:4440/websocket'
 })
 // And listen for everything!
 Antares.subscribe('*')
