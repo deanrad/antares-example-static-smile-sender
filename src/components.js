@@ -1,16 +1,26 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-export const WelcomeComponent = ({ sendASmile }) => (
-    <div>
-    <p>Ho Hum.</p>
-    <button onClick={ sendASmile }>Send A Smile!</button>
-    </div>
-)
+// We recieve the top-level store, with most important keys 
+// - antares - where 'permanent' data reside
+// - view - specifics to this view, such as sort order
+// Each come back as immutable objects, let's select the part
+// we want and return as JS for demo purposes.
+const stateMapper = state => {
+    return state.antares && state.antares.get('Declan').toJS()
+}
 
-export const Smiler = ({ sendASmile }) => (
+// Our state mapper provides new fields to each component
+export const WelcomeComponent = connect(stateMapper)(({ face, sendASmile }) => (
     <div>
-        <div style={{ fontSize: '1000%' }}>:)</div>
-        <br/>
-        <button onClick={ sendASmile }>Send A Smile!</button>
+        <button onClick={ sendASmile }>Make Declan Smile!</button>
+        <div style={{ fontSize: '500%' }}>{ face }</div>
     </div>
-)
+))
+
+export const Smiler = connect(stateMapper)(({ fans, face, sendASmile }) => (
+    <div>
+        <button onClick={ sendASmile }>Make Declan Smile!</button>
+        <div style={{ fontSize: `${(fans-1) * 500}%` }}>{ face }</div>
+    </div>
+))

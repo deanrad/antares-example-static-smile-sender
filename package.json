@@ -5,17 +5,18 @@
   "dependencies": {
     "antares-protocol": "^0.3.14",
     "react": "15.4.2",
-    "react-dom": "15.4.2"
+    "react-dom": "15.4.2",
+    "react-redux": "^5.0.3"
   },
   "devDependencies": {
     "react-scripts": "0.9.2"
   },
-  "homepage": "https://www.deanius.com/antares-example-static-smile-sender",
+  "homepage": "https://www.deanius.com/antares-example-static-smile-sender-2",
   "scripts": {
     "start": "PORT=7777 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "react-scripts build && aws s3 cp build s3://www.deanius.com/antares-example-static-smile-sender --recursive"
+    "deploy": "react-scripts build && aws s3 cp build s3://www.deanius.com/antares-example-static-smile-sender-2 --recursive"
   }
 }

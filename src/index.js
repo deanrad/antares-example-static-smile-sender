@@ -3,11 +3,20 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import { AntaresInit } from 'antares-protocol'
 import { WelcomeComponent, Smiler } from './components'
+import * as Actions from './actions'
 
 // Connect us to a websocket
 let Antares = AntaresInit({
-    connectionUrl: 'ws://antares-example-smile-sender.herokuapp.com/websocket'
-    //connectionUrl: 'ws://localhost:7777/websocket'
+    connectionUrl: 'ws://antares-example-smile-sender.herokuapp.com/websocket',
+    //connectionUrl: 'ws://localhost:7777/websocket',
+
+    // At whatever key (we'll only get one), update
+    // the state with the following, using ImmutableJS syntax
+    ReducerForKey: key => (state, action) =>
+        state.merge({
+            ...action.payload,
+            fans: action.type === 'cry' ? 2 : state.get('fans') + 1
+        })
 })
 // Expose in consolefor demo purposes
 Object.assign(window, { Antares })
@@ -16,14 +25,30 @@ Antares.subscribe('*')
 
 const eventHandlers = {
     sendASmile: () => {
-        Antares.announce('smile!')
+        Antares.announce(Actions.smile)
     }
 }
 
+// Lets hardcode an object under the key 'Declan'
+// to be stored in every agent upon startup
+Antares.announce({
+    type: 'Antares.store',
+    payload: {
+        face: ':O',
+        fans: 2
+    },
+    meta: {
+        antares: {
+            key: 'Declan',
+            localOnly: true
+        }
+    }
+})
+
 // Start us up with the welcome element showing..
 // An element is an instance of a component
-const welcomeElement = <WelcomeComponent { ...eventHandlers } />
-const smilerElement = <Smiler { ...eventHandlers } />
+const welcomeElement = <WelcomeComponent { ...eventHandlers } store={Antares.store} />
+const smilerElement = <Smiler { ...eventHandlers } store={Antares.store} />
 const reactRoot = document.getElementById('root')
 ReactDOM.render(welcomeElement, reactRoot)
 
@@ -39,6 +64,6 @@ Antares.subscribeRenderer(({ action }) => {
 
     // Change it back in a bit
     setTimeout(() => {
-        ReactDOM.render(welcomeElement, reactRoot)
+        Antares.announce(Actions.cry)
     }, 2000)
 })
